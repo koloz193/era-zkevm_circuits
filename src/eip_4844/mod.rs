@@ -30,6 +30,8 @@ use boojum::pairing::ff::{Field, PrimeField};
 use std::mem::MaybeUninit;
 use std::sync::{Arc, RwLock};
 
+use pyo3::prelude::*;
+
 use super::*;
 
 pub mod input;
@@ -419,6 +421,7 @@ pub fn ethereum_4844_pubdata_into_bitreversed_lagrange_form_poly(input: &[u8]) -
     poly
 }
 
+#[pyfunction]
 pub fn ethereum_4844_data_into_zksync_pubdata(input: &[u8]) -> Vec<u8> {
     assert_eq!(input.len(), 32 * ELEMENTS_PER_4844_BLOCK);
     let mut poly = ethereum_4844_pubdata_into_bitreversed_lagrange_form_poly(input);
@@ -442,6 +445,12 @@ pub fn ethereum_4844_data_into_zksync_pubdata(input: &[u8]) -> Vec<u8> {
     assert_eq!(result.len(), BLOB_CHUNK_SIZE * ELEMENTS_PER_4844_BLOCK);
 
     result
+}
+
+#[pymodule]
+fn ethereum_4844_to_zksync_pubdata(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(ethereum_4844_data_into_zksync_pubdata, m)?)?;
+    Ok(())
 }
 
 #[cfg(test)]

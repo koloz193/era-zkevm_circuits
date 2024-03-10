@@ -5,6 +5,10 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "ethereum_4844_to_zksync_pubdata"
+crate-type = ["cdylib"]
+
 [dependencies]
 derivative = "2"
 serde = { version = "1", features = ["derive"] }
@@ -27,6 +31,8 @@ rand_new = { package = "rand", version = "0.8" }
 hex = "*"
 seq-macro = "0.3"
 
+pyo3 = { version = "0.20.3", features = ["extension-module"] }
+
 [features]
 default = []
 log_tracing = ["boojum/log_tracing"]
@@ -34,3 +40,4 @@ verbose_circuits = []
 
 [dev-dependencies]
 hex = "*"
+
