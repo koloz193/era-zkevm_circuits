@@ -448,7 +448,7 @@ pub fn ethereum_4844_data_into_zksync_pubdata(input: &[u8]) -> Vec<u8> {
 }
 
 #[pymodule]
-fn ethereum_4844_to_zksync_pubdata(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+fn zkevm_circuits(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(ethereum_4844_data_into_zksync_pubdata, m)?)?;
     Ok(())
 }

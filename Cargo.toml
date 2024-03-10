@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
-name = "ethereum_4844_to_zksync_pubdata"
+name = "zkevm_circuits"
 crate-type = ["cdylib"]
 
 [dependencies]
